@@ -4,65 +4,74 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
 // O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
 
-int main() {
-    // Nível Novato - Movimentação das Peças
-    // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
-    const int casasBispo = 5;
-    const int casasTorre = 5;
-    const int casasRainha = 8;
-
-    // Implementação de Movimentação do Bispo
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
-    printf("Movimento do Bispo: \n");
-    int contadorBispo = 1;
-    while (contadorBispo <= casasBispo) {
-        printf("Cima Direita\n");
-        contadorBispo++;
+// Nível Mestre - Funções Recursivas e Loops Aninhados
+void moverBispo(int casas, int contador) {
+    //Caso base - Se co ontador for maior que o número de casas, termina a recursão
+    if(contador > casas) {
+        return;
     }
-    printf("\n");
 
-    // Implementação de Movimentação da Torre
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
-    printf("Movimento da Torre:\n");
-    for (int i = 1; i <= casasTorre; i++) {
+//Movimento do Bispo
+printf("Cima Direita\n");
+//Chamada recursiva para o próximo movimento
+moverBispo(casas, contador + 1);
+}
+
+//Função para movimentar a Torre para a direta
+void moverTorre(int casas) {
+    for (int i = 1; i <= casas; i++) {
         printf("Direita\n");
     }
-    printf("\n");
+}
 
-    // Implementação de Movimentação da Rainha
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
-    printf("Movimento da Rainha: \n");
-    int contadorRainha = 1;
+//Função para movimentar a Rainha para a esquerda
+void moverRainha(int casas) {
+    int contador = 1;
     do {
         printf("Esquerda\n");
-        contadorRainha++;
-    } while (contadorRainha <= casasRainha);
-    printf("\n");
+        contador++;
+    } while (contador <= casas);
+}
 
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
-
-    printf("Movimento do Cavalo: \n");
-    for (int i = 1; i <= 2; i++) {
-        for(int j = 1; j <= 1; j++) {
-            printf("Baixo\n");
+//Função para movimentor o Cavalho (L, uma vez para cima à direita)
+void moverCavalo() {
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            if (i==0 && j == 0) {
+                printf("Cima\n");
+            } else if (i == 1 && j == 1){
+                printf("Direita\n");
+                break; //Termina o segundo loop após o cavalo movimentar uma vez
+            }
+            continue; // Para continuar o loop caso a condição não for atendida
         }
     }
+}
 
-    for (int i = 1; i <= 1; i++) {
-        for(int j = 1; j <= 2; j++) {
-            printf("Esquerda\n");
-        }
+int main() {
 
+    // Movimentação do Bispo com recursão
+    const int casasBispo = 5;
+    printf("Movimento do Bispo: \n");
+    moverBispo(casasBispo, 1);
     printf("\n");
 
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
+    // Movimentação da Torre
+    const int casasTorre = 5;
+    printf("Movimento da Torre: \n");
+    moverTorre(casasTorre);
+    printf("\n");
 
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
+    // Movimentação da Rainha
+    const int casasRainha = 8;
+    printf("Movimento da Rainha: \n");
+    moverRainha(casasRainha);
+    printf("\n");
+
+    // Movimentação do Cavalo
+    printf("Movimento do Cavalo: \n");
+    moverCavalo();
+    printf("\n");
 
     return 0;
 }
